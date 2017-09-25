@@ -1,6 +1,5 @@
 function varargout = basic_comparison_statistics(varargin)
 
-
 % Gather all input arguments
 [~,args,~] = axescheck(varargin{:});
 
@@ -8,17 +7,15 @@ function varargout = basic_comparison_statistics(varargin)
 obs = args{1};
 model = args{2};
 
-% Catch second argument as second dataset if it is not a string
+% Catch third argument, it should be string (options)
 if ~ischar(args{3})
     error('Argument 3 should be character/option...')
 end
-
 
 indx_eliminate = find(strcmpi(args,'eliminate'),1);
 indx_eliminate_under = find(strcmpi(args,'eliminateunder'),1);
 indx_eliminate_over = find(strcmpi(args,'eliminateover'),1);
 indx_NS = find(strcmpi(args,'NS'),1);
-
 
 % Eliminate data if they contain nans
 nan_index = ~isnan(obs);
@@ -79,7 +76,6 @@ else
     
 end
 
-
 % Provide results for two datasets
 [BIAS, RMSE, RR, NS] = statistics_two_sets(obs,model,NS_mean);
 varargout{1} = BIAS;
@@ -87,8 +83,8 @@ varargout{2} = RMSE;
 varargout{3} = RR;
 varargout{4} = NS;
 
-
 end
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Internal Function 
 function varargout = statistics_two_sets(obs,model,ns_mean)

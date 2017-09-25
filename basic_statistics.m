@@ -1,13 +1,12 @@
 function varargout = basic_statistics(varargin)
 
-
 % Gather all input arguments
 [~,args,nargs] = axescheck(varargin{:});
 
 % Catch first argument as first dataset
 obs = args{1};
 
-% Catch second argument as second dataset if it is not a string
+% Check second argument, it should be a string (options)
 if nargs>1
     if ~ischar(args{2})
         error('Invalid arguments, only one dataset required...')
@@ -17,11 +16,9 @@ end
 indx_percentiles = find(strcmpi(args,'percentiles'), 1);
 indx_bins = find(strcmpi(args,'bins'), 1);
 
-
 % Eliminate data if they contain nans
 nan_index = ~isnan(obs);
 obs = obs(nan_index);
-
 
 if isempty(indx_percentiles) && isempty(indx_bins) 
     [MEAN, STD, VAR, BINS] = statistics_one_set(obs);
@@ -41,7 +38,6 @@ varargout{4} = BINS;
 
 
 end
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Internal Function
@@ -66,7 +62,6 @@ else
 end
 
 out_index = out_index + 1;
-
 
 % Calculate percentiles
 if ~isempty(indx_percentiles)
