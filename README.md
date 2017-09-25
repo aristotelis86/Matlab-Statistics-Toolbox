@@ -1,4 +1,6 @@
 # Matlab-Statistics-Toolbox
 
-Basic and Advanced Statistical tools for data analysis and model evaluation.
+Basic and advanced statistical tools for data analysis and Numerical Wearther Prediction (NWP) models evaluation.
+
+
 
